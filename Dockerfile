@@ -14,6 +14,9 @@ RUN apt-get update && \
     apt-get autoremove -y && \
     rm -rf /var/logs
 
+RUN useradd -rm -d /home/folding -s /bin/bash -u 1000 folding
+USER 1000
+WORKDIR /home/folding
 
 ENV USER Anonymous
 ENV TEAM 0
