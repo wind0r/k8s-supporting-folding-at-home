@@ -32,7 +32,10 @@ spec:
           - name: TEAM
             value: "{{default "0" .Values.folding.team }}"
           - name: PASSKEY
-            value: "{{default "" .Values.folding.passkey }}"
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "k8s-supporting-folding-at-home.fullname" . }}
+                key: passkey
           - name: POWER
             value: "{{default "medium" .Values.folding.power }}"
           ports:
