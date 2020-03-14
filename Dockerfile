@@ -7,8 +7,8 @@ RUN apt-get update && \
     curl -o /tmp/fah.tar.bz2 https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.5/fahclient_7.5.1-64bit-release.tar.bz2 && \
     tar --wildcards --to-stdout -xvf /tmp/fah.tar.bz2 "*/FAHClient" >> /bin/FAHClient && \
     tar --wildcards --to-stdout -xvf /tmp/fah.tar.bz2 "*/FAHCoreWrapper" >> /bin/FAHCoreWrapper && \
-    chmod u+x /bin/FAHClient && \
-    chmod u+x /bin/FAHCoreWrapper && \
+    chmod 0755 /bin/FAHClient && \
+    chmod 0755 /bin/FAHCoreWrapper && \
     rm /tmp/fah.tar.bz2 && \
     apt-get remove -y curl bzip2 && \
     apt-get autoremove -y && \
