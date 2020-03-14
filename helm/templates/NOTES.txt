@@ -1,0 +1,8 @@
+Thank you for joining us in supporting folding@home and donating unused computing power to fight against COVID-19!
+
+You can use the Web interface under :7396 per POD to see how much computing power you are currently donating :)
+
+Example:
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "k8s-supporting-folding-at-home.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  echo "Visit http://127.0.0.1:7396 to use your application"
+  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 7396:7396

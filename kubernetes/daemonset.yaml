@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: k8s-supporting-folding-at-home
+  labels:
+    app.kubernetes.io/name: k8s-supporting-folding-at-home
+    app.kubernetes.io/version: "latest"
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: k8s-supporting-folding-at-home
+      app.kubernetes.io/version: "latest"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: k8s-supporting-folding-at-home
+        app.kubernetes.io/version: "latest"
+    spec:
+      serviceAccountName: k8s-supporting-folding-at-home
+      containers:
+        - name: k8s-supporting-folding-at-home
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+          image: "wind0r/folding-at-home:latest"
+          imagePullPolicy: Always
+          env:
+            - name: USER
+              value: "Anonymous"
+            - name: TEAM
+              value: "0"
+            - name: PASSKEY
+              value: ""
+            - name: POWER
+              value: "light"
+          ports:
+            - name: http
+              containerPort: 7396
+              protocol: TCP
+          resources: {}
