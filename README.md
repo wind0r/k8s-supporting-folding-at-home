@@ -25,7 +25,7 @@ helm install folding ./k8s-supporting-folding-at-home/helm
 
 ## Settings
 
-User: Anonymous
-Team: 0
-Passkey: (get one here: https://apps.foldingathome.org/getpasskey)
-Power : light/medium/full
+* User: Anonymous
+* Team: 0
+* Passkey: (get one here: https://apps.foldingathome.org/getpasskey)
+* Power : light/medium/full
