@@ -22,9 +22,11 @@ ENV USER Anonymous
 ENV TEAM 0
 ENV PASSKEY ""
 ENV POWER full
-ENV GPU false 
+ENV GPU false
+ENV ALLOW "127.0.0.1/32:7396"
+ENV WEBALLOW "127.0.0.1/32:7396"
 # needs driver and opencl support
 
 EXPOSE 7396
 
-ENTRYPOINT ["sh", "-c", "FAHClient --allow=0/0:7396 --web-allow=0/0:7396 --user=$USER --team=$TEAM --passkey=$PASSKEY --power=$POWER --gpu=$GPU"]
+ENTRYPOINT ["sh", "-c", "FAHClient --allow=${ALLOW} --web-allow=${WEBALLOW} --user='${USER}' --team='${TEAM}' --passkey='${PASSKEY}' --power=${POWER} --gpu=${GPU}"]
