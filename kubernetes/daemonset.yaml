@@ -17,9 +17,13 @@ spec:
         app.kubernetes.io/version: "latest"
     spec:
       serviceAccountName: k8s-supporting-folding-at-home
+      volumes:
+        - name: data-volume
+          emptyDir: {}
       containers:
         - name: k8s-supporting-folding-at-home
           securityContext:
+            readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
           image: "wind0r/folding-at-home:latest"
@@ -30,11 +34,22 @@ spec:
             - name: TEAM
               value: "0"
             - name: PASSKEY
-              value: ""
+              valueFrom:
+                secretKeyRef:
+                  name: k8s-supporting-folding-at-home
+                  key: passkey
+                  optional: true
             - name: POWER
               value: "light"
+          volumeMounts:
+            - mountPath: /home/folding
+              name: data-volume
           ports:
             - name: http
               containerPort: 7396
               protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /favicon.ico
+              port: 7396
           resources: {}

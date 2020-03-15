@@ -20,6 +20,9 @@ spec:
       serviceAccountName: {{ include "k8s-supporting-folding-at-home.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: data-volume
+          emptyDir: {}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -38,10 +41,17 @@ spec:
                 key: passkey
           - name: POWER
             value: "{{default "medium" .Values.folding.power }}"
+          volumeMounts:
+          - mountPath: /home/folding
+            name: data-volume
           ports:
             - name: http
               containerPort: 7396
               protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /favicon.ico
+              port: 7396
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

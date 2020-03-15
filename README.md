@@ -14,6 +14,12 @@ This deploys a daemonset without resource limitation but folding-powerlevel is s
 kubectl apply -f https://raw.githubusercontent.com/wind0r/k8s-supporting-folding-at-home/master/kubernetes/
 ```
 
+Optional:
+
+```bash
+kubectl create secret generic k8s-supporting-folding-at-home --from-literal=passkey=${ADD_YOUR_PASSKEY_HERE}
+```
+
 ## Helm
 
 This deploys a daemonset via helm with folding-powerlevel set to medium. You can add resource limitation and change other settings via values files like with every other helm chart.
@@ -25,7 +31,11 @@ helm install folding ./k8s-supporting-folding-at-home/helm
 
 ## Settings
 
-* User: Anonymous
-* Team: 0
-* Passkey: (get one here: https://apps.foldingathome.org/getpasskey)
-* Power : light/medium/full
+- `USER`: user name, defaults to "Anonymous"
+- `TEAM`: team ID, defaults to "0"
+- `PASSKEY`: optional, get one here: https://apps.foldingathome.org/getpasskey
+- `POWER`: "light", "medium", or "full"
+
+## Forks
+
+- [run as deployment in unprivileged contexts by @hjacobs](https://codeberg.org/hjacobs/folding-at-home-on-kubernetes/src/branch/master/README.md)
