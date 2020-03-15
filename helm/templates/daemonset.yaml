@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: {{ include "k8s-supporting-folding-at-home.fullname" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     {{- include "k8s-supporting-folding-at-home.labels" . | nindent 4 }}
 spec:
